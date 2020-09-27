@@ -1,28 +1,25 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
+#filename: guessinggame.sh
 
-#For the course created by Vishi Agrawal
+numberoffiles=$(ls | wc -l)
+echo "Guess the number of files in the current directory:"
 
-echo "Guess the number of files in the current directory!!!"
+read user_input
 
-#Creating the function
-function keepguess(){
-    answer=$(ls -l |grep "^-"|wc -l)
-    while true;
+function checker {
+    while [ $user_input -ne $numberoffiles ]
     do
-        echo "Please enter/input your Guess!!!"
-        read  guess
-        if [ $guess -lt $answer ]
-        then
-            echo "Your guess is incorrect. Your Guess is lesser than Actual Value. Keep Guessing"
-        elif [ $guess -gt $answer ]
-        then
-            echo "Your guess is incorrect. Your Guess is greater than Actual Value. Keep Guessing"
-        else
-            echo "Your guess is correct. Congrats !!!"
-        break;
-        fi
+    if [ $user_input -gt $numberoffiles ]
+    then
+        echo "Input Higher than the actual value! Please try again!"
+        read user_input
+    else
+        echo "Input Lower than the actual value! Please try again!"
+        read user_input
+    fi
     done
 }
 
-#Calling the function
-keepguess
+checker
+
+echo "Congratulations! You guessed the right number of files: $numberoffiles !"
