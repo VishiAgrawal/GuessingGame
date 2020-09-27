@@ -1,2 +1,0 @@
-# GuessingGame
-The Unix Workbench
